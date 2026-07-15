@@ -251,6 +251,7 @@ body {
 .section-title { font-family: var(--font-body); font-weight: 900; font-size: clamp(2rem, 3.6vw, 3rem); line-height: 1.15; letter-spacing: -0.01em; margin: 0 0 1.25rem; }
 .section-title-light { color: var(--cream); }
 .section-head { max-width: 640px; margin-bottom: 3rem; }
+.section-head-center { max-width: 620px; margin-inline: auto; text-align: center; }
 
 /* ---------- About ---------- */
 .about { background: var(--cream); padding-block: 7rem; }
@@ -294,6 +295,7 @@ body {
 /* ---------- Menus: tile grid ---------- */
 .menus { background: var(--black); padding-block: 6rem; }
 .menus .section-eyebrow { color: var(--gold-light); }
+.menus-lead { color: rgba(250,246,238,0.68); font-size: 1rem; margin-top: -0.5rem; }
 .menus .section-title { color: var(--cream); }
 
 .menu-tiles {
@@ -350,6 +352,11 @@ body {
 }
 .menu-tile-zoom .icon { width: 1.05rem; height: 1.05rem; }
 .menu-tile:hover .menu-tile-zoom { background: var(--gold); border-color: var(--gold); color: var(--black); }
+.menu-tile.reveal {
+  transform: translateY(36px) scale(0.93);
+  transition: opacity .7s cubic-bezier(.22,1.24,.4,1), transform .7s cubic-bezier(.22,1.24,.4,1);
+}
+.menu-tile.reveal.is-visible { transform: none; }
 .menu-tile:nth-child(1) { transition-delay: 0s; }
 .menu-tile:nth-child(2) { transition-delay: .12s; }
 .menu-tile:nth-child(3) { transition-delay: .24s; }

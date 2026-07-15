@@ -173,27 +173,50 @@
 
   const galleryWrap = document.getElementById('scrollGallery');
   const galleryTrack = document.getElementById('scrollGalleryTrack');
-  if (galleryWrap && galleryTrack && !reduceMotion) {
-    let ticking = false;
-    const updateGallery = () => {
-      ticking = false;
-      const rect = galleryWrap.getBoundingClientRect();
-      const vh = window.innerHeight;
-      const total = vh + rect.height;
-      const raw = (vh - rect.top) / total;
-      const progress = Math.min(Math.max(raw, 0), 1);
-      const travel = Math.max(galleryTrack.scrollWidth - galleryWrap.clientWidth, 0);
-      galleryTrack.style.transform = `translateX(${-progress * travel}px)`;
+  const galleryPrev = document.getElementById('galleryPrev');
+  const galleryNext = document.getElementById('galleryNext');
+  if (galleryWrap && galleryTrack) {
+    const SCROLL_SPEED = 0.35;
+    const STEP = 260;
+    let manualOffset = 0;
+    let loopWidth = galleryTrack.scrollWidth / 2;
+
+    const render = () => {
+      if (loopWidth <= 0) return;
+      const raw = window.scrollY * SCROLL_SPEED + manualOffset;
+      const x = -(((raw % loopWidth) + loopWidth) % loopWidth);
+      galleryTrack.style.transform = `translateX(${x}px)`;
     };
-    const onGalleryScroll = () => {
-      if (!ticking) {
-        ticking = true;
-        requestAnimationFrame(updateGallery);
-      }
-    };
-    updateGallery();
-    window.addEventListener('scroll', onGalleryScroll, { passive: true });
-    window.addEventListener('resize', updateGallery);
+
+    if (reduceMotion) {
+      galleryTrack.style.transform = 'translateX(0)';
+    } else {
+      let ticking = false;
+      const onScrollGallery = () => {
+        if (!ticking) {
+          ticking = true;
+          requestAnimationFrame(() => {
+            ticking = false;
+            render();
+          });
+        }
+      };
+      render();
+      window.addEventListener('scroll', onScrollGallery, { passive: true });
+      window.addEventListener('resize', () => {
+        loopWidth = galleryTrack.scrollWidth / 2;
+        render();
+      });
+
+      const nudge = (dir) => {
+        galleryTrack.classList.add('is-paging');
+        manualOffset += dir * STEP;
+        render();
+        window.setTimeout(() => galleryTrack.classList.remove('is-paging'), 450);
+      };
+      if (galleryPrev) galleryPrev.addEventListener('click', () => nudge(-1));
+      if (galleryNext) galleryNext.addEventListener('click', () => nudge(1));
+    }
   }
 
   onScroll();

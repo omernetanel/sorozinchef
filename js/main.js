@@ -68,47 +68,36 @@
   );
   revealTargets.forEach((el) => revealObserver.observe(el));
 
-  const menuCards = document.querySelectorAll('.menu-card');
-  const menuPanels = document.querySelectorAll('.menu-panel');
-  menuCards.forEach((card) => {
-    card.addEventListener('click', () => {
-      const target = card.dataset.menu;
-      menuCards.forEach((c) => {
-        const active = c === card;
-        c.classList.toggle('is-active', active);
-        c.setAttribute('aria-pressed', String(active));
-      });
-      menuPanels.forEach((panel) => {
-        panel.classList.toggle('is-active', panel.dataset.menu === target);
-      });
-      document.getElementById('menus').scrollIntoView({ behavior: 'smooth', block: 'start' });
-    });
-  });
-
   const lightbox = document.getElementById('lightbox');
-  const lightboxImg = document.getElementById('lightboxImg');
+  const lightboxGallery = document.getElementById('lightboxGallery');
   const lightboxClose = document.getElementById('lightboxClose');
   let lastFocused = null;
 
-  const openLightbox = (src, alt) => {
+  const openLightbox = (sources, title) => {
     lastFocused = document.activeElement;
-    lightboxImg.src = src;
-    lightboxImg.alt = alt;
+    lightboxGallery.innerHTML = '';
+    lightboxGallery.classList.toggle('is-pair', sources.length > 1);
+    sources.forEach((src, i) => {
+      const img = document.createElement('img');
+      img.src = src;
+      img.alt = sources.length > 1 ? `${title} – עמוד ${i + 1}` : title;
+      lightboxGallery.appendChild(img);
+    });
     lightbox.hidden = false;
     lightboxClose.focus();
     document.body.style.overflow = 'hidden';
   };
   const closeLightbox = () => {
     lightbox.hidden = true;
-    lightboxImg.src = '';
+    lightboxGallery.innerHTML = '';
     document.body.style.overflow = '';
     if (lastFocused) lastFocused.focus();
   };
 
-  document.querySelectorAll('.menu-poster-btn').forEach((btn) => {
-    btn.addEventListener('click', () => {
-      const img = btn.querySelector('img');
-      openLightbox(btn.dataset.full, img ? img.alt : '');
+  document.querySelectorAll('.menu-tile').forEach((tile) => {
+    tile.addEventListener('click', () => {
+      const sources = tile.dataset.images.split(',');
+      openLightbox(sources, tile.dataset.title || '');
     });
   });
   lightboxClose.addEventListener('click', closeLightbox);

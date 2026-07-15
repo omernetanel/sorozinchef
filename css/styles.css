@@ -209,17 +209,24 @@ body {
 .btn-cta-ghost-dark { background: transparent; color: var(--ink); border-color: rgba(26,22,19,0.3); }
 .btn-cta-ghost-dark:hover { border-color: var(--gold-deep); background: var(--ink); color: var(--cream); }
 
-.hero-media { position: relative; padding: 0 0 2.5rem 2rem; }
+.hero-media { position: relative; }
+.hero-media::before {
+  content: '';
+  position: absolute;
+  inset: 1.25rem -1.25rem -1.25rem 1.25rem;
+  border: 1.5px solid var(--gold);
+  border-radius: 18px;
+  z-index: 0;
+}
 .hero-photo {
+  position: relative;
+  z-index: 1;
   width: 100%;
-  aspect-ratio: 4/4.6;
+  aspect-ratio: 4/4.1;
   object-fit: cover;
-  object-position: 70% 20%;
-  border-radius: var(--radius);
-  border: 6px solid var(--cream);
-  outline: 1px solid var(--line-light);
-  box-shadow: 0 24px 50px rgba(26,22,19,0.18);
-  transform: rotate(2deg);
+  object-position: 65% 15%;
+  border-radius: 18px;
+  box-shadow: 0 24px 60px rgba(26,22,19,0.22);
 }
 
 .hero-anim > * { opacity: 0; transform: translateY(22px); animation: heroIn .85s var(--ease) forwards; }
@@ -278,7 +285,7 @@ body {
 .about-text { color: var(--ink-soft); font-size: 1.05rem; margin: 0 0 1.25rem; max-width: 60ch; }
 .about-signature { font-family: var(--font-display); font-style: italic; font-size: 1.7rem; color: var(--gold-deep); margin-top: 1.5rem; }
 
-.seal { position: absolute; bottom: -1rem; inset-inline-end: -1.25rem; width: 132px; height: 132px; z-index: 3; }
+.seal { position: absolute; bottom: -1rem; inset-inline-end: -1.25rem; width: 132px; height: 132px; z-index: 3; overflow: hidden; border-radius: 50%; }
 .seal-ring { width: 100%; height: 100%; animation: sealSpin 24s linear infinite; }
 @keyframes sealSpin { to { transform: rotate(360deg); } }
 .seal-text { font-family: var(--font-body); font-size: 10.5px; font-weight: 700; letter-spacing: 0.5px; fill: var(--gold-deep); }
@@ -465,7 +472,8 @@ body {
   .about-media { max-width: 440px; margin-inline: auto; padding-inline-end: 0; }
   .contact-grid { grid-template-columns: 1fr; }
   .hero-inner { grid-template-columns: 1fr; }
-  .hero-media { order: -1; max-width: 440px; margin-inline: auto; padding: 0 0 1.5rem 1.5rem; }
+  .hero-media { order: -1; max-width: 420px; margin: 0 auto 2rem; }
+  .hero-media::before { inset: 1rem -0.85rem -0.85rem 1rem; }
 }
 
 @media (max-width: 760px) {

@@ -78,7 +78,7 @@
     <img src="assets/images/hero-chef.jpg" alt="שפי Sorozin Chef לפני שולחן עמוס ירקות טריים, מוכנים להכנת האירוע" class="hero-bg" loading="eager">
     <div class="hero-scrim" aria-hidden="true"></div>
     <div class="container hero-inner">
-      <div class="hero-copy reveal">
+      <div class="hero-copy hero-anim">
         <p class="eyebrow">Premium Meat Experience</p>
         <h1 class="hero-title">האירוע שלכם.<br>חוויית בשר<br><span class="hero-title-accent">שלא נשכחת.</span></h1>
         <p class="hero-text">אנו מתמחים ביצירת אירועי בוטיק ובהגשת אוכל משובח, עם ניסיון של למעלה מ-30 שנה בעולם הקולינריה. השפים והצוות שלנו מלווים כל אירוע בדיוק ובתשוקה.</p>
@@ -100,11 +100,11 @@
   <!-- STATS -->
   <section class="stats" aria-label="נתונים על העסק">
     <div class="container stats-line">
-      <span class="stats-item"><strong>30+</strong> שנות ניסיון</span>
+      <span class="stats-item"><strong data-count-to="30" data-suffix="+">0+</strong> שנות ניסיון</span>
       <span class="stats-rule" aria-hidden="true"></span>
-      <span class="stats-item"><strong>2</strong> שפים מובילים</span>
+      <span class="stats-item"><strong data-count-to="2">0</strong> שפים מובילים</span>
       <span class="stats-rule" aria-hidden="true"></span>
-      <span class="stats-item"><strong>100%</strong> בשר טרי ואיכותי</span>
+      <span class="stats-item"><strong data-count-to="100" data-suffix="%">0%</strong> בשר טרי ואיכותי</span>
       <span class="stats-rule" aria-hidden="true"></span>
       <span class="stats-item"><strong>בוטיק</strong> אירועים אינטימיים בלבד</span>
     </div>
@@ -116,6 +116,16 @@
       <div class="about-media reveal">
         <img src="assets/images/about-portrait.jpg" alt="יוסי סורוזין וצוות השפים של Sorozin Chef" class="about-portrait">
         <img src="assets/images/accent-veg.jpg" alt="ירקות טריים וסכין שף על קרש חיתוך, מוכנים לאירוע" class="about-accent">
+        <div class="seal" aria-hidden="true">
+          <svg viewBox="0 0 200 200" class="seal-ring">
+            <path id="sealPath" d="M100,100 m-82,0 a82,82 0 1,1 164,0 a82,82 0 1,1 -164,0" fill="none"></path>
+            <text class="seal-text">
+              <textPath href="#sealPath" startOffset="0%">PREMIUM MEAT EXPERIENCE • SOROZIN CHEF • </textPath>
+              <textPath href="#sealPath" startOffset="50%">PREMIUM MEAT EXPERIENCE • SOROZIN CHEF • </textPath>
+            </text>
+          </svg>
+          <span class="seal-center">100%<br>בשר טרי</span>
+        </div>
       </div>
       <div class="about-copy reveal">
         <p class="section-eyebrow">מי אנחנו</p>
@@ -135,8 +145,8 @@
         <h2 class="section-title">בחרו תפריט, ולחצו להצגה מלאה</h2>
       </div>
 
-      <div class="menu-tiles reveal">
-        <button type="button" class="menu-tile" data-images="assets/images/menu-buffet.jpg" data-title="תפריט בופה">
+      <div class="menu-tiles">
+        <button type="button" class="menu-tile reveal" data-images="assets/images/menu-buffet.jpg" data-title="תפריט בופה">
           <img src="assets/images/menu-buffet.jpg" alt="תפריט בופה – Sorozin Chef" loading="lazy">
           <span class="menu-tile-scrim" aria-hidden="true"></span>
           <span class="menu-tile-label">
@@ -145,7 +155,7 @@
           </span>
         </button>
 
-        <button type="button" class="menu-tile" data-images="assets/images/menu-premium.jpg" data-title="תפריט פרימיום">
+        <button type="button" class="menu-tile reveal" data-images="assets/images/menu-premium.jpg" data-title="תפריט פרימיום">
           <img src="assets/images/menu-premium.jpg" alt="תפריט פרימיום – Sorozin Chef" loading="lazy">
           <span class="menu-tile-scrim" aria-hidden="true"></span>
           <span class="menu-tile-label">
@@ -154,7 +164,7 @@
           </span>
         </button>
 
-        <button type="button" class="menu-tile" data-images="assets/images/menu-shuk.jpg" data-title="שולחן שוק">
+        <button type="button" class="menu-tile reveal" data-images="assets/images/menu-shuk.jpg" data-title="שולחן שוק">
           <img src="assets/images/menu-shuk.jpg" alt="תפריט שולחן שוק – Sorozin Chef" loading="lazy">
           <span class="menu-tile-scrim" aria-hidden="true"></span>
           <span class="menu-tile-label">
@@ -163,7 +173,7 @@
           </span>
         </button>
 
-        <button type="button" class="menu-tile" data-images="assets/images/menu-specials-1.jpg,assets/images/menu-specials-2.jpg" data-title="תפריט ספיישלס">
+        <button type="button" class="menu-tile reveal" data-images="assets/images/menu-specials-1.jpg,assets/images/menu-specials-2.jpg" data-title="תפריט ספיישלס">
           <img src="assets/images/menu-specials-1.jpg" alt="תפריט ספיישלס – Sorozin Chef" loading="lazy">
           <span class="menu-tile-scrim" aria-hidden="true"></span>
           <span class="menu-tile-label">

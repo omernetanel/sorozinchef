@@ -18,14 +18,14 @@ legend { padding: 0; }
 :root {
   --black: #141110;
   --charcoal: #1d1917;
-  --cream: #faf6ee;
-  --cream-dim: #f0e9d9;
+  --cream: #f4f2ed;
+  --cream-dim: #e9e5dc;
   --ink: #1a1613;
   --ink-soft: #52493f;
-  --gold: #d99a2b;
-  --gold-deep: #b87f1f;
-  --gold-light: #f0bd63;
-  --line-dark: rgba(217, 154, 43, 0.3);
+  --gold: #caa22b;
+  --gold-deep: #9c6d1c;
+  --gold-light: #e5d276;
+  --line-dark: rgba(202, 162, 43, 0.3);
   --line-light: rgba(26, 22, 19, 0.12);
 
   --font-display: 'Frank Ruhl Libre', Georgia, serif;
@@ -93,7 +93,7 @@ body {
 .btn-cta-ghost { background: transparent; color: var(--cream); border-color: rgba(250,246,238,0.4); }
 .btn-cta-ghost:hover { border-color: var(--gold); color: var(--gold-light); }
 
-.btn-header-cta { background: var(--gold); color: var(--black); padding: 0.6rem 1.2rem; font-size: 0.85rem; }
+.btn-header-cta { background: var(--gold); color: var(--black); padding: 0.65rem 1.3rem; font-size: 0.85rem; border-radius: 6px; }
 .btn-header-cta:hover { background: var(--gold-light); }
 
 .btn-block { width: 100%; }
@@ -288,7 +288,7 @@ body {
   transform: rotate(4deg);
 }
 .about-text { color: var(--ink-soft); font-size: 1.05rem; margin: 0 0 1.25rem; max-width: 60ch; }
-.about-signature { font-family: var(--font-display); font-style: italic; font-size: 1.7rem; color: var(--gold-deep); margin-top: 1.5rem; }
+.about-signature { font-family: var(--font-body); font-weight: 900; font-size: 1.5rem; color: var(--gold-deep); margin-top: 1.5rem; }
 
 .seal { position: absolute; bottom: -1rem; inset-inline-end: -1.25rem; width: 132px; height: 132px; z-index: 3; overflow: hidden; border-radius: 50%; }
 .seal-ring { width: 100%; height: 100%; animation: sealSpin 24s linear infinite; }
@@ -306,6 +306,11 @@ body {
 .menus { background: var(--black); padding-block: 6rem; }
 .menus .section-eyebrow { color: var(--gold-light); }
 .menus-lead { color: rgba(250,246,238,0.68); font-size: 1rem; margin-top: -0.5rem; }
+.menus-title-fade {
+  transform: none;
+  transition: opacity 1.8s ease-out;
+}
+.menus-title-fade.is-visible { opacity: 1; }
 .menus .section-title { color: var(--cream); }
 
 .menu-tiles {
@@ -372,27 +377,27 @@ body {
 .menu-tile:nth-child(3) { transition-delay: .24s; }
 .menu-tile:nth-child(4) { transition-delay: .36s; }
 
-/* ---------- Scroll gallery (straddles menus/contact seam) ---------- */
+/* ---------- Scroll gallery (between about and menus) ---------- */
 .scroll-gallery {
   position: relative;
   z-index: 8;
-  height: 190px;
-  margin-top: -30px;
-  margin-bottom: -160px;
-  overflow: hidden;
+  direction: ltr;
+  background: var(--black);
+  padding-block: 2.5rem;
   padding-inline: 2rem;
+  overflow: hidden;
 }
 .scroll-gallery-track {
-  position: absolute;
-  inset-block: 0;
-  left: 0;
   display: flex;
+  direction: ltr;
   align-items: center;
   gap: 1.25rem;
+  width: max-content;
   will-change: transform;
 }
 .scroll-gallery-track.is-paging { transition: transform .45s var(--ease); }
 .scroll-gallery-item {
+  direction: rtl;
   flex: 0 0 auto;
   width: 240px;
   height: 168px;
@@ -429,9 +434,25 @@ body {
 }
 .scroll-gallery-nav:hover { background: var(--gold); color: var(--black); }
 .scroll-gallery-nav .icon { width: 1.2rem; height: 1.2rem; }
-.scroll-gallery-prev { inset-inline-start: 1rem; }
-.scroll-gallery-next { inset-inline-end: 1rem; }
+.scroll-gallery-prev { right: 1rem; }
+.scroll-gallery-next { left: 1rem; }
 .scroll-gallery-next .icon { transform: rotate(180deg); }
+
+/* ---------- Reviews ---------- */
+.reviews { background: var(--cream); padding-block: 6rem; }
+.reviews-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+.review-card {
+  background: var(--cream-dim);
+  border: 1px solid var(--line-light);
+  border-radius: var(--radius);
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+.review-stars { color: var(--gold-deep); letter-spacing: 0.15em; font-size: 0.95rem; }
+.review-text { color: var(--ink-soft); font-size: 0.98rem; flex: 1; }
+.review-name { font-weight: 700; color: var(--ink); font-size: 0.9rem; }
 
 /* ---------- Contact ---------- */
 .contact { background: var(--black); color: var(--cream); padding-block: 6rem; }
@@ -537,6 +558,7 @@ body {
   .about-grid { grid-template-columns: 1fr; }
   .about-media { max-width: 440px; margin-inline: auto; padding-inline-end: 0; }
   .contact-grid { grid-template-columns: 1fr; }
+  .reviews-grid { grid-template-columns: 1fr; }
   .hero-inner { grid-template-columns: 1fr; }
   .hero-media { order: -1; max-width: 420px; margin: 0 auto 2rem; }
   .hero-media::before { inset: 1rem -0.85rem -0.85rem 1rem; }
@@ -566,13 +588,13 @@ body {
 
   .menu-tiles { grid-template-columns: repeat(2, 1fr); }
 
-  .scroll-gallery { height: 130px; margin-top: -18px; margin-bottom: -112px; }
+  .scroll-gallery { padding-block: 1.75rem; padding-inline: 1rem; }
   .scroll-gallery-item { width: 160px; height: 112px; gap: 0.35rem; font-size: 0.75rem; border-radius: 0; }
   .scroll-gallery-item .icon { width: 1.4rem; height: 1.4rem; }
   .scroll-gallery-nav { width: 38px; height: 38px; }
   .scroll-gallery-nav .icon { width: 1rem; height: 1rem; }
-  .scroll-gallery-prev { inset-inline-start: 0.5rem; }
-  .scroll-gallery-next { inset-inline-end: 0.5rem; }
+  .scroll-gallery-prev { right: 0.5rem; }
+  .scroll-gallery-next { left: 0.5rem; }
   .lightbox-gallery.is-pair img { max-width: 100%; }
   .fab-whatsapp { width: 50px; height: 50px; bottom: 1rem; inset-inline-start: 1rem; }
   .back-to-top { width: 42px; height: 42px; bottom: 1rem; inset-inline-end: 1rem; }

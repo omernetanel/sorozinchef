@@ -171,6 +171,31 @@
     window.open(url, '_blank', 'noopener,noreferrer');
   });
 
+  const galleryWrap = document.getElementById('scrollGallery');
+  const galleryTrack = document.getElementById('scrollGalleryTrack');
+  if (galleryWrap && galleryTrack && !reduceMotion) {
+    let ticking = false;
+    const updateGallery = () => {
+      ticking = false;
+      const rect = galleryWrap.getBoundingClientRect();
+      const vh = window.innerHeight;
+      const total = vh + rect.height;
+      const raw = (vh - rect.top) / total;
+      const progress = Math.min(Math.max(raw, 0), 1);
+      const travel = Math.max(galleryTrack.scrollWidth - galleryWrap.clientWidth, 0);
+      galleryTrack.style.transform = `translateX(${-progress * travel}px)`;
+    };
+    const onGalleryScroll = () => {
+      if (!ticking) {
+        ticking = true;
+        requestAnimationFrame(updateGallery);
+      }
+    };
+    updateGallery();
+    window.addEventListener('scroll', onGalleryScroll, { passive: true });
+    window.addEventListener('resize', updateGallery);
+  }
+
   onScroll();
   window.addEventListener('scroll', onScroll, { passive: true });
 })();

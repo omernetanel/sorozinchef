@@ -22,10 +22,10 @@ legend { padding: 0; }
   --cream-dim: #e9e5dc;
   --ink: #1a1613;
   --ink-soft: #52493f;
-  --gold: #948d80;
-  --gold-deep: #6b6458;
-  --gold-light: #c9c2b3;
-  --line-dark: rgba(148, 141, 128, 0.3);
+  --gold: #b3ada0;
+  --gold-deep: #8a8477;
+  --gold-light: #e2ddd0;
+  --line-dark: rgba(179, 173, 160, 0.35);
   --line-light: rgba(26, 22, 19, 0.12);
 
   --font-display: 'Frank Ruhl Libre', Georgia, serif;
@@ -264,7 +264,7 @@ body {
   color: var(--cream);
   font-size: 1rem;
 }
-.stats-item strong { color: var(--gold-light); font-family: var(--font-display); font-size: 1.3rem; font-weight: 700; margin-inline-end: 0.35em; }
+.stats-item strong { color: var(--gold-light); font-family: var(--font-body); font-size: 1.25rem; font-weight: 800; margin-inline-end: 0.35em; }
 .stats-rule { width: 4px; height: 4px; border-radius: 50%; background: var(--gold-deep); }
 
 /* ---------- Section heads ---------- */
@@ -275,7 +275,7 @@ body {
 .section-head-center { max-width: 620px; margin-inline: auto; text-align: center; }
 
 /* ---------- About ---------- */
-.about { background: var(--cream); padding-block: 7rem 14rem; }
+.about { background: var(--cream); padding-block: 7rem; }
 .about-grid { display: grid; grid-template-columns: 0.9fr 1.1fr; gap: 4.5rem; align-items: center; }
 .about-media { position: relative; padding: 0 2rem 2.5rem 0; }
 .about-portrait {
@@ -301,27 +301,40 @@ body {
 .about-text { color: var(--ink-soft); font-size: 1.05rem; margin: 0 0 1.25rem; max-width: 60ch; }
 .about-signature { font-family: var(--font-body); font-weight: 900; font-size: 1.5rem; color: var(--gold-deep); margin-top: 1.5rem; }
 
-.seal { position: absolute; bottom: -1rem; inset-inline-end: -1.25rem; width: 132px; height: 132px; z-index: 3; overflow: hidden; border-radius: 50%; }
-.seal-ring { width: 100%; height: 100%; animation: sealSpin 24s linear infinite; }
-@keyframes sealSpin { to { transform: rotate(360deg); } }
-.seal-text { font-family: var(--font-body); font-size: 10.5px; font-weight: 700; letter-spacing: 0.5px; fill: var(--gold-deep); }
-.seal-center {
-  position: absolute; inset: 0; margin: auto; width: 68%; height: 68%;
-  display: flex; flex-direction: column; align-items: center; justify-content: center;
-  font-family: var(--font-display); font-weight: 700; color: var(--ink); font-size: 1.05rem; line-height: 1.2;
-  text-align: center; background: var(--cream); border-radius: 50%;
-  box-shadow: 0 8px 20px rgba(26,22,19,0.22);
+.seal {
+  position: absolute;
+  bottom: -1.5rem;
+  inset-inline-end: -1.75rem;
+  width: 190px;
+  height: 190px;
+  z-index: 3;
+  overflow: hidden;
+  border-radius: 50%;
+  filter: drop-shadow(0 12px 24px rgba(26,22,19,0.35));
 }
+.seal-ring { position: absolute; inset: 0; width: 100%; height: 100%; animation: sealSpin 28s linear infinite; }
+.seal-text { font-family: var(--font-body); font-size: 8.5px; font-weight: 700; letter-spacing: 1px; fill: var(--gold-deep); }
+.seal-img {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 62%;
+  height: 62%;
+  border-radius: 50%;
+}
+@keyframes sealSpin { to { transform: rotate(360deg); } }
 
 /* ---------- Menus: tile grid ---------- */
-.menus { background: var(--black); padding-block: 16rem 6rem; }
+.menus { background: var(--black); padding-block: 6rem 16rem; }
 .menus .section-eyebrow { color: var(--gold-light); }
 .menus-lead { color: rgba(250,246,238,0.68); font-size: 1rem; margin-top: -0.5rem; }
 .menus-title-fade {
-  transform: none;
-  transition: opacity 1.8s ease-out;
+  transform: scale(0.92);
+  filter: blur(16px);
+  transition: opacity 1.6s ease-out, filter 1.6s ease-out, transform 1.6s ease-out;
 }
-.menus-title-fade.is-visible { opacity: 1; }
+.menus-title-fade.is-visible { opacity: 1; filter: blur(0); transform: scale(1); }
 .menus .section-title { color: var(--cream); }
 
 .menu-tiles {
@@ -429,7 +442,7 @@ body {
 .scroll-gallery-item .icon { width: 2rem; height: 2rem; opacity: 0.6; }
 
 /* ---------- Reviews ---------- */
-.reviews { background: var(--cream); padding-block: 6rem; }
+.reviews { background: var(--cream); padding-block: 12rem 6rem; }
 .reviews-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
 .review-card {
   background: var(--cream-dim);
@@ -445,7 +458,13 @@ body {
 .review-name { font-weight: 700; color: var(--ink); font-size: 0.9rem; }
 
 /* ---------- Contact ---------- */
-.contact { background: var(--black); color: var(--cream); padding-block: 6rem; }
+.contact {
+  background:
+    linear-gradient(rgba(20,17,16,0.9), rgba(20,17,16,0.94)),
+    url("../assets/images/wood-bg.jpg") center/cover no-repeat;
+  color: var(--cream);
+  padding-block: 6rem;
+}
 .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start; }
 .contact-text { color: rgba(250,246,238,0.75); max-width: 42ch; margin-bottom: 2rem; }
 .contact-list { display: flex; flex-direction: column; gap: 1rem; }
@@ -548,7 +567,9 @@ body {
   .about-grid { grid-template-columns: 1fr; }
   .about { padding-block: 5rem; }
   .about-media { max-width: 440px; margin-inline: auto; padding-inline-end: 0; }
+  .seal { width: 150px; height: 150px; bottom: -1rem; inset-inline-end: -0.5rem; }
   .contact-grid { grid-template-columns: 1fr; }
+  .reviews { padding-block: 7rem 4rem; }
   .reviews-grid { grid-template-columns: 1fr; }
   .hero-inner { grid-template-columns: 1fr; }
   .hero-media { order: -1; max-width: 420px; margin: 0 auto 2rem; }
@@ -577,7 +598,7 @@ body {
 
   .stats-line { gap: 0.75rem; font-size: 0.9rem; }
 
-  .menus { padding-block: 10.5rem 4rem; }
+  .menus { padding-block: 4rem 10.5rem; }
   .menu-tiles { grid-template-columns: repeat(2, 1fr); }
 
   .scroll-gallery { margin-block: -104px; padding-block: 3rem; padding-inline: 1.5rem; }

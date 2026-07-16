@@ -109,36 +109,6 @@
   });
 
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  const counters = document.querySelectorAll('[data-count-to]');
-  const animateCounter = (el) => {
-    const target = Number(el.dataset.countTo);
-    const suffix = el.dataset.suffix || '';
-    if (reduceMotion) {
-      el.textContent = target + suffix;
-      return;
-    }
-    const duration = 1300;
-    const start = performance.now();
-    const step = (now) => {
-      const progress = Math.min((now - start) / duration, 1);
-      const eased = 1 - Math.pow(1 - progress, 3);
-      el.textContent = Math.round(target * eased) + suffix;
-      if (progress < 1) requestAnimationFrame(step);
-    };
-    requestAnimationFrame(step);
-  };
-  const counterObserver = new IntersectionObserver(
-    (entries, obs) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          animateCounter(entry.target);
-          obs.unobserve(entry.target);
-        }
-      });
-    },
-    { threshold: 0.6 }
-  );
-  counters.forEach((el) => counterObserver.observe(el));
 
   const backToTop = document.getElementById('backToTop');
   backToTop.addEventListener('click', () => {

@@ -106,13 +106,13 @@
   <!-- STATS -->
   <section class="stats" aria-label="נתונים על העסק">
     <div class="container stats-line">
-      <span class="stats-item"><strong data-count-to="30" data-suffix="+">0+</strong> שנות ניסיון</span>
+      <span class="stats-item"><strong>30+</strong> שנות ניסיון</span>
       <span class="stats-rule" aria-hidden="true"></span>
-      <span class="stats-item"><strong data-count-to="2">0</strong> שפים מובילים</span>
+      <span class="stats-item"><strong>2</strong> שפים בכל אירוע</span>
       <span class="stats-rule" aria-hidden="true"></span>
-      <span class="stats-item"><strong data-count-to="100" data-suffix="%">0%</strong> בשר טרי ואיכותי</span>
+      <span class="stats-item"><strong>100%</strong> בשר טרי ואיכותי</span>
       <span class="stats-rule" aria-hidden="true"></span>
-      <span class="stats-item"><strong>בוטיק</strong> אירועים אינטימיים בלבד</span>
+      <span class="stats-item"><strong>0</strong> פשרות על האיכות</span>
     </div>
   </section>
 
@@ -122,16 +122,17 @@
       <div class="about-media reveal">
         <img src="assets/images/about-portrait.jpg" alt="יוסי סורוזין וצוות השפים של Sorozin Chef" class="about-portrait">
         <img src="assets/images/accent-veg.jpg" alt="ירקות טריים וסכין שף על קרש חיתוך, מוכנים לאירוע" class="about-accent">
-        <div class="seal" aria-hidden="true">
-          <svg viewBox="0 0 200 200" class="seal-ring">
-            <path id="sealPath" d="M100,100 m-82,0 a82,82 0 1,1 164,0 a82,82 0 1,1 -164,0" fill="none"></path>
+        <div class="seal">
+          <svg viewBox="0 0 200 200" class="seal-ring" aria-hidden="true">
+            <path id="sealPath" d="M100,100 m-92,0 a92,92 0 1,1 184,0 a92,92 0 1,1 -184,0" fill="none"></path>
             <text class="seal-text">
-              <textPath href="#sealPath" startOffset="0%">PREMIUM MEAT EXPERIENCE • SOROZIN CHEF • </textPath>
-              <textPath href="#sealPath" startOffset="50%">PREMIUM MEAT EXPERIENCE • SOROZIN CHEF • </textPath>
+              <textPath href="#sealPath" startOffset="0%">SOROZIN CHEF &#8226; PREMIUM MEAT EXPERIENCE &#8226; </textPath>
+              <textPath href="#sealPath" startOffset="50%">SOROZIN CHEF &#8226; PREMIUM MEAT EXPERIENCE &#8226; </textPath>
             </text>
           </svg>
-          <span class="seal-center">100%<br>בשר טרי</span>
+          <img src="assets/images/badge-fresh.png" alt="100% בשר טרי" class="seal-img">
         </div>
+
       </div>
       <div class="about-copy reveal">
         <h2 class="section-title">שני שפים.<br>תשוקה אחת לבשר.</h2>
@@ -141,28 +142,6 @@
       </div>
     </div>
   </section>
-
-  <!-- SCROLL GALLERY (straddles the seam between menus and contact) -->
-  <div class="scroll-gallery" id="scrollGallery">
-    <div class="scroll-gallery-track" id="scrollGalleryTrack" role="presentation" aria-hidden="true">
-      <div class="scroll-gallery-item"><svg class="icon" aria-hidden="true"><use href="#icon-image"></use></svg><span>תמונה 1</span></div>
-      <div class="scroll-gallery-item"><svg class="icon" aria-hidden="true"><use href="#icon-image"></use></svg><span>תמונה 2</span></div>
-      <div class="scroll-gallery-item"><svg class="icon" aria-hidden="true"><use href="#icon-image"></use></svg><span>תמונה 3</span></div>
-      <div class="scroll-gallery-item"><svg class="icon" aria-hidden="true"><use href="#icon-image"></use></svg><span>תמונה 4</span></div>
-      <div class="scroll-gallery-item"><svg class="icon" aria-hidden="true"><use href="#icon-image"></use></svg><span>תמונה 5</span></div>
-      <div class="scroll-gallery-item"><svg class="icon" aria-hidden="true"><use href="#icon-image"></use></svg><span>תמונה 6</span></div>
-      <div class="scroll-gallery-item"><svg class="icon" aria-hidden="true"><use href="#icon-image"></use></svg><span>תמונה 7</span></div>
-      <div class="scroll-gallery-item"><svg class="icon" aria-hidden="true"><use href="#icon-image"></use></svg><span>תמונה 8</span></div>
-      <div class="scroll-gallery-item"><svg class="icon" aria-hidden="true"><use href="#icon-image"></use></svg><span>תמונה 1</span></div>
-      <div class="scroll-gallery-item"><svg class="icon" aria-hidden="true"><use href="#icon-image"></use></svg><span>תמונה 2</span></div>
-      <div class="scroll-gallery-item"><svg class="icon" aria-hidden="true"><use href="#icon-image"></use></svg><span>תמונה 3</span></div>
-      <div class="scroll-gallery-item"><svg class="icon" aria-hidden="true"><use href="#icon-image"></use></svg><span>תמונה 4</span></div>
-      <div class="scroll-gallery-item"><svg class="icon" aria-hidden="true"><use href="#icon-image"></use></svg><span>תמונה 5</span></div>
-      <div class="scroll-gallery-item"><svg class="icon" aria-hidden="true"><use href="#icon-image"></use></svg><span>תמונה 6</span></div>
-      <div class="scroll-gallery-item"><svg class="icon" aria-hidden="true"><use href="#icon-image"></use></svg><span>תמונה 7</span></div>
-      <div class="scroll-gallery-item"><svg class="icon" aria-hidden="true"><use href="#icon-image"></use></svg><span>תמונה 8</span></div>
-    </div>
-  </div>
 
   <!-- MENUS -->
   <section class="menus" id="menus">
@@ -211,6 +190,28 @@
       </div>
     </div>
   </section>
+
+  <!-- SCROLL GALLERY (straddles the seam between menus and contact) -->
+  <div class="scroll-gallery" id="scrollGallery">
+    <div class="scroll-gallery-track" id="scrollGalleryTrack" role="presentation" aria-hidden="true">
+      <div class="scroll-gallery-item"><svg class="icon" aria-hidden="true"><use href="#icon-image"></use></svg><span>תמונה 1</span></div>
+      <div class="scroll-gallery-item"><svg class="icon" aria-hidden="true"><use href="#icon-image"></use></svg><span>תמונה 2</span></div>
+      <div class="scroll-gallery-item"><svg class="icon" aria-hidden="true"><use href="#icon-image"></use></svg><span>תמונה 3</span></div>
+      <div class="scroll-gallery-item"><svg class="icon" aria-hidden="true"><use href="#icon-image"></use></svg><span>תמונה 4</span></div>
+      <div class="scroll-gallery-item"><svg class="icon" aria-hidden="true"><use href="#icon-image"></use></svg><span>תמונה 5</span></div>
+      <div class="scroll-gallery-item"><svg class="icon" aria-hidden="true"><use href="#icon-image"></use></svg><span>תמונה 6</span></div>
+      <div class="scroll-gallery-item"><svg class="icon" aria-hidden="true"><use href="#icon-image"></use></svg><span>תמונה 7</span></div>
+      <div class="scroll-gallery-item"><svg class="icon" aria-hidden="true"><use href="#icon-image"></use></svg><span>תמונה 8</span></div>
+      <div class="scroll-gallery-item"><svg class="icon" aria-hidden="true"><use href="#icon-image"></use></svg><span>תמונה 1</span></div>
+      <div class="scroll-gallery-item"><svg class="icon" aria-hidden="true"><use href="#icon-image"></use></svg><span>תמונה 2</span></div>
+      <div class="scroll-gallery-item"><svg class="icon" aria-hidden="true"><use href="#icon-image"></use></svg><span>תמונה 3</span></div>
+      <div class="scroll-gallery-item"><svg class="icon" aria-hidden="true"><use href="#icon-image"></use></svg><span>תמונה 4</span></div>
+      <div class="scroll-gallery-item"><svg class="icon" aria-hidden="true"><use href="#icon-image"></use></svg><span>תמונה 5</span></div>
+      <div class="scroll-gallery-item"><svg class="icon" aria-hidden="true"><use href="#icon-image"></use></svg><span>תמונה 6</span></div>
+      <div class="scroll-gallery-item"><svg class="icon" aria-hidden="true"><use href="#icon-image"></use></svg><span>תמונה 7</span></div>
+      <div class="scroll-gallery-item"><svg class="icon" aria-hidden="true"><use href="#icon-image"></use></svg><span>תמונה 8</span></div>
+    </div>
+  </div>
 
   <!-- REVIEWS (placeholder, content to follow) -->
   <section class="reviews" id="reviews">

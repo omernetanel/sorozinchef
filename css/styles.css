@@ -156,9 +156,7 @@ body {
   transition: background-color .2s var(--ease), color .2s var(--ease), border-color .2s var(--ease);
 }
 .header-icon-link:hover { background: var(--gold); border-color: var(--gold); color: var(--black); }
-.header-icon-link .icon { width: 1.2rem; height: 1.2rem; }
-.header-icon-link .icon:has(use[href="#icon-whatsapp"]),
-.header-icon-link .icon:has(use[href="#icon-instagram"]) { fill: currentColor; }
+.header-icon-link .icon { width: 1.2rem; height: 1.2rem; fill: currentColor; }
 
 .nav-toggle {
   display: none;

@@ -22,10 +22,10 @@ legend { padding: 0; }
   --cream-dim: #e9e5dc;
   --ink: #1a1613;
   --ink-soft: #52493f;
-  --gold: #caa22b;
-  --gold-deep: #9c6d1c;
-  --gold-light: #e5d276;
-  --line-dark: rgba(202, 162, 43, 0.3);
+  --gold: #948d80;
+  --gold-deep: #6b6458;
+  --gold-light: #c9c2b3;
+  --line-dark: rgba(148, 141, 128, 0.3);
   --line-light: rgba(26, 22, 19, 0.12);
 
   --font-display: 'Frank Ruhl Libre', Georgia, serif;
@@ -314,7 +314,7 @@ body {
 }
 
 /* ---------- Menus: tile grid ---------- */
-.menus { background: var(--black); padding-block: 6rem; }
+.menus { background: var(--black); padding-block: 16rem 6rem; }
 .menus .section-eyebrow { color: var(--gold-light); }
 .menus-lead { color: rgba(250,246,238,0.68); font-size: 1rem; margin-top: -0.5rem; }
 .menus-title-fade {
@@ -395,7 +395,7 @@ body {
   direction: ltr;
   margin-block: -156px;
   padding-block: 4.5rem;
-  padding-inline: 4.5rem;
+  padding-inline: 2.5rem;
   overflow: hidden;
   -webkit-mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
   mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
@@ -408,7 +408,6 @@ body {
   width: max-content;
   will-change: transform;
 }
-.scroll-gallery-track.is-paging { transition: transform .45s var(--ease); }
 .scroll-gallery-item {
   direction: rtl;
   flex: 0 0 auto;
@@ -428,28 +427,6 @@ body {
   box-shadow: 0 22px 45px rgba(0,0,0,0.4);
 }
 .scroll-gallery-item .icon { width: 2rem; height: 2rem; opacity: 0.6; }
-
-.scroll-gallery-nav {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  z-index: 9;
-  width: 46px;
-  height: 46px;
-  border-radius: 50%;
-  border: 1px solid var(--line-dark);
-  background: rgba(20,17,16,0.7);
-  color: var(--gold-light);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: background-color .2s var(--ease), color .2s var(--ease);
-}
-.scroll-gallery-nav:hover { background: var(--gold); color: var(--black); }
-.scroll-gallery-nav .icon { width: 1.2rem; height: 1.2rem; }
-.scroll-gallery-prev { left: 1rem; }
-.scroll-gallery-next { right: 1rem; }
-.scroll-gallery-next .icon { transform: rotate(180deg); }
 
 /* ---------- Reviews ---------- */
 .reviews { background: var(--cream); padding-block: 6rem; }
@@ -600,15 +577,12 @@ body {
 
   .stats-line { gap: 0.75rem; font-size: 0.9rem; }
 
+  .menus { padding-block: 10.5rem 4rem; }
   .menu-tiles { grid-template-columns: repeat(2, 1fr); }
 
-  .scroll-gallery { margin-block: -104px; padding-block: 3rem; padding-inline: 3.5rem; }
+  .scroll-gallery { margin-block: -104px; padding-block: 3rem; padding-inline: 1.5rem; }
   .scroll-gallery-item { width: 160px; height: 112px; gap: 0.35rem; font-size: 0.75rem; border-radius: 0; }
   .scroll-gallery-item .icon { width: 1.4rem; height: 1.4rem; }
-  .scroll-gallery-nav { width: 38px; height: 38px; }
-  .scroll-gallery-nav .icon { width: 1rem; height: 1rem; }
-  .scroll-gallery-prev { right: 0.5rem; }
-  .scroll-gallery-next { left: 0.5rem; }
   .lightbox-gallery.is-pair img { max-width: 100%; }
   .fab-whatsapp { width: 50px; height: 50px; bottom: 1rem; inset-inline-end: 1rem; }
   .back-to-top { width: 42px; height: 42px; bottom: 1rem; inset-inline-start: 1rem; }

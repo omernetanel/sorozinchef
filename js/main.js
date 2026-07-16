@@ -173,17 +173,13 @@
 
   const galleryWrap = document.getElementById('scrollGallery');
   const galleryTrack = document.getElementById('scrollGalleryTrack');
-  const galleryPrev = document.getElementById('galleryPrev');
-  const galleryNext = document.getElementById('galleryNext');
   if (galleryWrap && galleryTrack) {
     const SCROLL_SPEED = 0.35;
-    const STEP = 260;
-    let manualOffset = 0;
     let loopWidth = galleryTrack.scrollWidth / 2;
 
     const render = () => {
       if (loopWidth <= 0) return;
-      const raw = window.scrollY * SCROLL_SPEED + manualOffset;
+      const raw = window.scrollY * SCROLL_SPEED;
       const x = -(((raw % loopWidth) + loopWidth) % loopWidth);
       galleryTrack.style.transform = `translateX(${x}px)`;
     };
@@ -207,15 +203,6 @@
         loopWidth = galleryTrack.scrollWidth / 2;
         render();
       });
-
-      const nudge = (dir) => {
-        galleryTrack.classList.add('is-paging');
-        manualOffset += dir * STEP;
-        render();
-        window.setTimeout(() => galleryTrack.classList.remove('is-paging'), 450);
-      };
-      if (galleryPrev) galleryPrev.addEventListener('click', () => nudge(-1));
-      if (galleryNext) galleryNext.addEventListener('click', () => nudge(1));
     }
   }
 

@@ -275,7 +275,7 @@ body {
 .section-head-center { max-width: 620px; margin-inline: auto; text-align: center; }
 
 /* ---------- About ---------- */
-.about { background: var(--cream); padding-block: 7rem 12rem; }
+.about { background: var(--cream); padding-block: 7rem 14rem; }
 .about-grid { display: grid; grid-template-columns: 0.9fr 1.1fr; gap: 4.5rem; align-items: center; }
 .about-media { position: relative; padding: 0 2rem 2.5rem 0; }
 .about-portrait {
@@ -393,10 +393,12 @@ body {
   position: relative;
   z-index: 8;
   direction: ltr;
-  margin-block: -124px;
-  padding-block: 2.5rem;
-  padding-inline: 2rem;
+  margin-block: -156px;
+  padding-block: 4.5rem;
+  padding-inline: 4.5rem;
   overflow: hidden;
+  -webkit-mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
+  mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
 }
 .scroll-gallery-track {
   display: flex;
@@ -600,7 +602,7 @@ body {
 
   .menu-tiles { grid-template-columns: repeat(2, 1fr); }
 
-  .scroll-gallery { margin-block: -84px; padding-block: 1.75rem; padding-inline: 1rem; }
+  .scroll-gallery { margin-block: -104px; padding-block: 3rem; padding-inline: 3.5rem; }
   .scroll-gallery-item { width: 160px; height: 112px; gap: 0.35rem; font-size: 0.75rem; border-radius: 0; }
   .scroll-gallery-item .icon { width: 1.4rem; height: 1.4rem; }
   .scroll-gallery-nav { width: 38px; height: 38px; }

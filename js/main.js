@@ -9,32 +9,6 @@
     backToTop.classList.toggle('is-visible', window.scrollY > 600);
   };
 
-  const navToggle = document.getElementById('navToggle');
-  const mainNav = document.getElementById('mainNav');
-  const navBackdrop = document.getElementById('navBackdrop');
-
-  const closeNav = () => {
-    navToggle.setAttribute('aria-expanded', 'false');
-    mainNav.classList.remove('is-open');
-    navBackdrop.classList.remove('is-visible');
-    document.body.style.overflow = '';
-  };
-  const openNav = () => {
-    navToggle.setAttribute('aria-expanded', 'true');
-    mainNav.classList.add('is-open');
-    navBackdrop.classList.add('is-visible');
-    document.body.style.overflow = 'hidden';
-  };
-  navToggle.addEventListener('click', () => {
-    const isOpen = navToggle.getAttribute('aria-expanded') === 'true';
-    isOpen ? closeNav() : openNav();
-  });
-  navBackdrop.addEventListener('click', closeNav);
-  mainNav.querySelectorAll('a').forEach((a) => a.addEventListener('click', closeNav));
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape') closeNav();
-  });
-
   const navLinks = Array.from(document.querySelectorAll('.nav-link'));
   const sections = navLinks
     .map((link) => document.querySelector(link.getAttribute('href')))
@@ -80,7 +54,7 @@
     sources.forEach((src, i) => {
       const img = document.createElement('img');
       img.src = src;
-      img.alt = sources.length > 1 ? `${title} – עמוד ${i + 1}` : title;
+      img.alt = sources.length > 1 ? `${title}, עמוד ${i + 1}` : title;
       lightboxGallery.appendChild(img);
     });
     lightbox.hidden = false;
@@ -115,66 +89,57 @@
     window.scrollTo({ top: 0, behavior: 'smooth' });
   });
 
-  const form = document.getElementById('contactForm');
-  const formStatus = document.getElementById('formStatus');
-  form.addEventListener('submit', (e) => {
-    e.preventDefault();
-    const name = form.name.value.trim();
-    const phone = form.phone.value.trim();
-
-    if (!name || !phone) {
-      formStatus.textContent = 'נא למלא שם וטלפון ליצירת קשר.';
-      return;
-    }
-
-    const lines = [
-      'היי, מעוניין/ת לתאם אירוע דרך האתר:',
-      `שם: ${name}`,
-      `טלפון: ${phone}`,
-      `סוג אירוע: ${form.type.value}`,
-      form.date.value ? `תאריך משוער: ${form.date.value}` : null,
-      form.message.value.trim() ? `הודעה: ${form.message.value.trim()}` : null,
-    ].filter(Boolean);
-
-    const url = `https://wa.me/972544357315?text=${encodeURIComponent(lines.join('\n'))}`;
-    formStatus.textContent = 'פותח את וואטסאפ...';
-    window.open(url, '_blank', 'noopener,noreferrer');
+  // Video posters: Instagram's player is only loaded once a poster is clicked
+  document.querySelectorAll('.video-poster').forEach((poster) => {
+    poster.addEventListener('click', () => {
+      const frame = document.createElement('div');
+      frame.className = 'embed-crop';
+      const iframe = document.createElement('iframe');
+      iframe.src = `https://www.instagram.com/reel/${poster.dataset.reel}/embed/`;
+      iframe.title = poster.getAttribute('aria-label');
+      iframe.allowFullscreen = true;
+      iframe.scrolling = 'no';
+      frame.appendChild(iframe);
+      poster.replaceWith(frame);
+    });
   });
 
-  const galleryWrap = document.getElementById('scrollGallery');
-  const galleryTrack = document.getElementById('scrollGalleryTrack');
-  if (galleryWrap && galleryTrack) {
-    const SCROLL_SPEED = 0.35;
-    let loopWidth = galleryTrack.scrollWidth / 2;
-
-    const render = () => {
-      if (loopWidth <= 0) return;
-      const raw = window.scrollY * SCROLL_SPEED;
-      const x = -(((raw % loopWidth) + loopWidth) % loopWidth);
-      galleryTrack.style.transform = `translateX(${x}px)`;
-    };
-
-    if (reduceMotion) {
-      galleryTrack.style.transform = 'translateX(0)';
-    } else {
-      let ticking = false;
-      const onScrollGallery = () => {
-        if (!ticking) {
-          ticking = true;
-          requestAnimationFrame(() => {
-            ticking = false;
-            render();
-          });
-        }
-      };
-      render();
-      window.addEventListener('scroll', onScrollGallery, { passive: true });
-      window.addEventListener('resize', () => {
-        loopWidth = galleryTrack.scrollWidth / 2;
-        render();
-      });
-    }
+  const reviewsTrack = document.getElementById('reviewsTrack');
+  const reviewsCount = document.getElementById('reviewsCount');
+  const reviewsTotal = reviewsTrack.children.length;
+  // RTL strip: scrollLeft runs from 0 down to negative values
+  const currentReview = () => Math.round(Math.abs(reviewsTrack.scrollLeft) / reviewsTrack.clientWidth);
+  const goToReview = (index) => {
+    const target = (index + reviewsTotal) % reviewsTotal;
+    reviewsTrack.scrollTo({ left: -target * reviewsTrack.clientWidth, behavior: reduceMotion ? 'auto' : 'smooth' });
+  };
+  // Reviews advance on their own until the visitor takes over (arrows, swipe, wheel or keyboard)
+  let reviewsTimer = null;
+  const stopReviewsAuto = () => {
+    clearInterval(reviewsTimer);
+    reviewsTimer = null;
+  };
+  if (!reduceMotion) {
+    reviewsTimer = setInterval(() => {
+      const box = reviewsTrack.getBoundingClientRect();
+      const onScreen = box.bottom > 0 && box.top < window.innerHeight;
+      if (onScreen && !reviewsTrack.matches(':hover')) goToReview(currentReview() + 1);
+    }, 6000);
+    ['pointerdown', 'wheel', 'keydown'].forEach((type) => {
+      reviewsTrack.addEventListener(type, stopReviewsAuto, { passive: true, once: true });
+    });
   }
+  document.getElementById('reviewsNext').addEventListener('click', () => {
+    stopReviewsAuto();
+    goToReview(currentReview() + 1);
+  });
+  document.getElementById('reviewsPrev').addEventListener('click', () => {
+    stopReviewsAuto();
+    goToReview(currentReview() - 1);
+  });
+  reviewsTrack.addEventListener('scroll', () => {
+    reviewsCount.textContent = `${currentReview() + 1} / ${reviewsTotal}`;
+  }, { passive: true });
 
   onScroll();
   window.addEventListener('scroll', onScroll, { passive: true });

@@ -2,3 +2,10 @@ node_modules/
 dist/
 .DS_Store
 Thumbs.db
+
+# local only: dev tooling and the original, unoptimised images
+package.json
+package-lock.json
+_originals/
+public/
+.claude/

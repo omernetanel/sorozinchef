@@ -233,15 +233,41 @@ body {
 }
 .hero-actions { display: flex; flex-wrap: wrap; gap: 1rem; }
 
-.btn-cta-ghost-dark { background: transparent; color: var(--ink); border-color: rgba(26,22,19,0.3); }
+/* Hero pair: the WhatsApp button in the brand beige, the menus link a clear outline */
+.hero-actions .btn-cta { background: var(--gold); color: var(--black); }
+.hero-actions .btn-cta:hover { background: var(--gold-light); }
+.btn-cta-ghost-dark { background: transparent; color: var(--ink); border-color: rgba(20,19,20,0.45); }
 .btn-cta-ghost-dark:hover { border-color: var(--gold-deep); background: var(--ink); color: var(--cream); }
 
-.hero-anim > * { opacity: 0; transform: translateY(22px); animation: heroIn .85s var(--ease) forwards; }
-.hero-anim > *:nth-child(1) { animation-delay: .05s; }
-.hero-anim > *:nth-child(2) { animation-delay: .2s; }
-.hero-anim > *:nth-child(3) { animation-delay: .38s; }
-.hero-anim > *:nth-child(4) { animation-delay: .54s; }
-@keyframes heroIn { to { opacity: 1; transform: none; } }
+/* Hero copy enters as soon as the page loads: each piece rises into focus in turn */
+.hero-anim > * { opacity: 0; transform: translateY(34px); filter: blur(8px); animation: heroIn 1s var(--ease) forwards; }
+.hero-anim > *:nth-child(1) { animation-delay: .1s; }
+.hero-anim > *:nth-child(2) { animation-delay: .3s; }
+.hero-anim > *:nth-child(3) { animation-delay: .5s; }
+.hero-anim > *:nth-child(4) { animation-delay: .7s; }
+@keyframes heroIn { to { opacity: 1; transform: none; filter: none; } }
+
+/* Once the copy has landed, a glint crosses the title from right to left... */
+.hero-anim > .hero-title {
+  -webkit-mask: linear-gradient(100deg, #000 42%, rgba(0,0,0,0.3) 50%, #000 58%) 0% 0 / 250% 100% no-repeat;
+  mask: linear-gradient(100deg, #000 42%, rgba(0,0,0,0.3) 50%, #000 58%) 0% 0 / 250% 100% no-repeat;
+  animation: heroIn 1s var(--ease) .1s forwards, titleGlint 1.2s ease-in-out 1.7s 1 both;
+}
+@keyframes titleGlint { from { -webkit-mask-position: 0% 0; mask-position: 0% 0; } to { -webkit-mask-position: 100% 0; mask-position: 100% 0; } }
+
+/* ...and then one sweeps the signature back, from left to right.
+   The highlight is masked by the signature itself, so only the ink catches it. */
+.hero-signature { position: relative; }
+.hero-signature::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(100deg, transparent 42%, rgba(255,255,255,0.95) 50%, transparent 58%) 100% 0 / 250% 100% no-repeat;
+  -webkit-mask: url('../assets/images/signature-dark.png') center / contain no-repeat;
+  mask: url('../assets/images/signature-dark.png') center / contain no-repeat;
+  animation: signatureGlint 1.3s ease-in-out 2.9s 1 both;
+}
+@keyframes signatureGlint { from { background-position: 100% 0; } to { background-position: 0% 0; } }
 
 /* ---------- Stats (inline editorial line) ---------- */
 .stats { background: var(--black); padding-block: 1.75rem; }
@@ -249,6 +275,8 @@ body {
 .stats-item { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 0.2rem; font-size: 0.95rem; text-align: center; }
 .stats-item strong { color: var(--gold-light); font-size: 1.9rem; font-weight: 800; line-height: 1.1; }
 .stats-item-word strong { font-size: 1.5rem; }
+/* equal-width digits, so the bar doesn't shift while the numbers count up */
+.stats-item [data-count] { font-variant-numeric: tabular-nums; }
 .stats-rule { width: 1px; background: var(--line-dark); }
 
 /* ---------- Section heads ---------- */
@@ -588,7 +616,7 @@ body {
   .footer-col { flex-direction: row; flex-wrap: wrap; justify-content: center; gap: 0.5rem 1.25rem; }
   /* room below the last line for the floating buttons */
   .footer-bottom { flex-direction: column; gap: 0.4rem; padding-bottom: 5rem; text-align: center; }
-  .about { padding-block: 5rem; }
+  .about { padding-block: 3rem 5rem; }
   .about-media { max-width: 360px; margin-inline: auto; }
   .contact { padding-block: 4rem; }
   .reviews { padding-block: 4rem; }
@@ -635,15 +663,14 @@ body {
 }
 
 @media (max-width: 560px) {
-  /* Phone first screen, top to bottom: the copy, the signature beside the
-     herbs, the whole board edge to edge, then the two buttons on the photo's
-     empty tabletop, then the stats bar.
+  /* Phone first screen, top to bottom: the copy, the two buttons, the
+     signature beside the herbs, the whole board edge to edge, then the stats bar.
      Hero metrics are in vw (the header is 56px) so the copy wraps the same on
      every phone and the photo lines up with it. */
   .hero {
-    --stats-h: 15.5vw;
+    --stats-h: 19vw;
     /* header bottom to the board's top corner */
-    --copy-h: 73.6vw;
+    --copy-h: 92.1vw;
     min-height: calc(100vh - var(--stats-h));
     min-height: calc(100svh - var(--stats-h));
     background: linear-gradient(to right, #edeae5, #f0f0eb 50%, #f6f4f2);
@@ -660,19 +687,20 @@ body {
     mask-image: linear-gradient(to bottom, transparent, #000 8%);
     pointer-events: none;
   }
-  .hero-inner { padding-block: calc(56px + 3vw) 2.4vw; }
+  /* the bottom padding holds the board and the knife handles (23% to 78% of the photo) */
+  .hero-inner { padding-block: calc(56px + 3vw) 102vw; }
   .hero-inner::before { display: none; }
   .hero-copy { display: flex; flex-direction: column; }
-  .hero-title { font-size: 8.8vw; line-height: 1.1; margin-bottom: 2.5vw; }
+  .hero-title { font-size: 8.8vw; line-height: 1.1; margin-bottom: 3vw; }
   .hero-text { max-width: 84vw; margin: 0; font-size: 3.9vw; line-height: 1.45; }
-  .hero-signature { align-self: flex-start; width: 40vw; margin: 1vw 0 0; }
-  /* pushed past the board and the knife handles (23% to 78% of the photo) */
-  .hero-actions { flex-wrap: nowrap; gap: 2.5vw; margin-top: 99.5vw; }
+  .hero-signature { order: 2; align-self: flex-start; width: 40vw; margin: 3vw 0 0; }
+  .hero-actions { order: 1; flex-wrap: nowrap; gap: 2.5vw; margin-top: 5vw; }
+  /* on phones the buttons come before the signature, so they enter first too */
+  .hero-anim > .hero-actions { animation-delay: .5s; }
+  .hero-anim > .hero-signature { animation-delay: .7s; }
   .hero-actions .btn { flex: 1; min-width: 0; height: 11vw; padding: 0 2vw; gap: 1.8vw; font-size: 3.5vw; }
-  .hero-actions .btn-cta-ghost-dark { background: rgba(244, 242, 237, 0.92); }
-  .hero-actions .btn-cta-ghost-dark:hover { background: var(--ink); }
 
-  .stats { height: 15.5vw; padding-block: 0; display: flex; align-items: center; }
+  .stats { height: 19vw; padding-block: 0; display: flex; align-items: center; }
   .stats-line { width: 100%; }
   .stats-item { gap: 0.4vw; font-size: 2.9vw; }
   .stats-item strong { font-size: 5.6vw; }

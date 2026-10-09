@@ -42,6 +42,38 @@
   );
   revealTargets.forEach((el) => revealObserver.observe(el));
 
+  // Stats: the numbers count up from zero the first time the bar comes into view
+  const counters = document.querySelectorAll('[data-count]');
+  const runCounter = (el) => {
+    const target = Number(el.dataset.count);
+    const suffix = el.dataset.suffix || '';
+    const duration = 1400;
+    const start = performance.now();
+    const tick = (now) => {
+      const progress = Math.min((now - start) / duration, 1);
+      const eased = 1 - Math.pow(1 - progress, 3);
+      el.textContent = `${Math.round(target * eased)}${suffix}`;
+      if (progress < 1) requestAnimationFrame(tick);
+    };
+    requestAnimationFrame(tick);
+  };
+  if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    const counterObserver = new IntersectionObserver(
+      (entries, obs) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          runCounter(entry.target);
+          obs.unobserve(entry.target);
+        });
+      },
+      { threshold: 0.6 }
+    );
+    counters.forEach((el) => {
+      el.textContent = `0${el.dataset.suffix || ''}`;
+      counterObserver.observe(el);
+    });
+  }
+
   const lightbox = document.getElementById('lightbox');
   const lightboxGallery = document.getElementById('lightboxGallery');
   const lightboxClose = document.getElementById('lightboxClose');

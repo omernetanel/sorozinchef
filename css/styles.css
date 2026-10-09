@@ -247,15 +247,7 @@ body {
 .hero-anim > *:nth-child(4) { animation-delay: .7s; }
 @keyframes heroIn { to { opacity: 1; transform: none; filter: none; } }
 
-/* Once the copy has landed, a glint crosses the title from right to left... */
-.hero-anim > .hero-title {
-  -webkit-mask: linear-gradient(100deg, #000 42%, rgba(0,0,0,0.3) 50%, #000 58%) 0% 0 / 250% 100% no-repeat;
-  mask: linear-gradient(100deg, #000 42%, rgba(0,0,0,0.3) 50%, #000 58%) 0% 0 / 250% 100% no-repeat;
-  animation: heroIn 1s var(--ease) .1s forwards, titleGlint 1.2s ease-in-out 1.7s 1 both;
-}
-@keyframes titleGlint { from { -webkit-mask-position: 0% 0; mask-position: 0% 0; } to { -webkit-mask-position: 100% 0; mask-position: 100% 0; } }
-
-/* ...and then one sweeps the signature back, from left to right.
+/* Once the copy has landed, a single glint sweeps the signature from left to right.
    The highlight is masked by the signature itself, so only the ink catches it. */
 .hero-signature { position: relative; }
 .hero-signature::after {
@@ -265,7 +257,7 @@ body {
   background: linear-gradient(100deg, transparent 42%, rgba(255,255,255,0.95) 50%, transparent 58%) 100% 0 / 250% 100% no-repeat;
   -webkit-mask: url('../assets/images/signature-dark.png') center / contain no-repeat;
   mask: url('../assets/images/signature-dark.png') center / contain no-repeat;
-  animation: signatureGlint 1.3s ease-in-out 2.9s 1 both;
+  animation: signatureGlint 1.3s ease-in-out 1.8s 1 both;
 }
 @keyframes signatureGlint { from { background-position: 100% 0; } to { background-position: 0% 0; } }
 
